@@ -108,7 +108,7 @@ func isFileNoEncrypt(fileName string) bool {
 // 将文件名称进行base64加密，得到的密文作为新的文件名
 func encryptWithBase64(fileName string) string {
 	fileName = base64.StdEncoding.EncodeToString([]byte(fileName))
-	fileName = strings.ReplaceAll(fileName, "/", "_")
+	fileName = strings.ReplaceAll(fileName, "/", "_") //密文可能会有'/'字符，这个字符会导致重命名失败，因此需要将'/'替换
 	return fileName
 }
 
