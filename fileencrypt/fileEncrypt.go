@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -42,6 +43,7 @@ func Start() {
 	}
 	//执行加密或解密操作
 	Execute(inputStr, inputInt)
+
 }
 
 // 执行加密或解密文件的函数，directoryStr为文件夹，mode为用户的选择
@@ -91,6 +93,8 @@ func Execute(directoryStr string, mode int) {
 				newPath := filepath.Join(directoryStr, newFileName)
 				os.Rename(oldPath, newPath)
 			}
+			//打开解密后的文件夹，此处调用命令行打开文件资源管理器
+			exec.Command("cmd", "/c", "start "+directoryStr).Output()
 		}
 	}
 	fmt.Println("执行完毕")
